@@ -2,7 +2,7 @@
 #include "resources.cpp";
 
 
-
+//Game class
 class Game
 {
 	public:
