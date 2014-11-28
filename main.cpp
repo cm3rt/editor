@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "resources.cpp";
+#include "parse_file.cpp";
+
 
 
 //Game class
@@ -48,10 +50,8 @@ Game::Game()
 	, PlayerSpeed(100.0f)
 	{
 		TextureHolder texHolder;
-
 		texHolder.load(Textures::Character, "Media/head.png");
 
-		
 		mPlayer.setPosition(100.f, 100.f);
 		mTexture = texHolder.get(Textures::Character);
 		
@@ -174,6 +174,7 @@ void Game::render()
 
 int main()
 {
+	Parser p;
 	Game game;
 	game.run();
 }
