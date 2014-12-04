@@ -19,7 +19,7 @@ private:
 	const char* const DELIMITER;
 	int line;
 	std::string varName;
-};
+}; 
 
 Parser::Parser() : 
 	DELIMITER(" "),

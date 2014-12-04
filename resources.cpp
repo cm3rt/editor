@@ -43,7 +43,7 @@ TextureHolder::TextureHolder()
 mTextureMap()
 {
 
-}
+} 
 void TextureHolder::load(Textures::ID id, const std::string& filename)
 {
 	std::unique_ptr<sf::Texture> texture(new sf::Texture());

@@ -1,40 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "resources.cpp";
 #include "parse_file.cpp";
+#include "Game.h";
 
 
 
-//Game class
-class Game
-{
-	public:
-							Game();
-		void				 run();
-		
 
-	private:
-		void				processEvents();
-		void				update(sf::Time deltaTime);
-		void				render();
-		void				handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-		void				handlePlayerMouse(sf::Mouse::Button button, bool isPressed);
-
-
-	private:
-		sf::RenderWindow	mWindow;
-		sf::Sprite			mPlayer;
-		sf::Texture			mTexture;
-		bool				mIsMovingUp;
-		bool				mIsMovingDown;
-		bool				mIsMovingLeft;
-		bool				mIsMovingRight;
-		int					counter;
-		const sf::Time		TimePerFrame;
-		const float			PlayerSpeed;
-		bool				mIsMouseLeftDown;
-		bool				mIsMouseRightDown;
-		
-};
 
 Game::Game()
 	: mWindow(sf::VideoMode(640, 480), "SFML Application")
@@ -162,7 +133,7 @@ void Game::update(sf::Time deltaTime)
 	}
 	
 	mPlayer.move(movement * deltaTime.asSeconds());
-
+	 
 }
 
 void Game::render()
