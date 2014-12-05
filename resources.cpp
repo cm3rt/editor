@@ -17,7 +17,8 @@ namespace Textures
 		House, 
 		Grass, 
 		Bushes,
-		River
+		River,
+		Logo
 	};
 };
 
