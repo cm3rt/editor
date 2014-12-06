@@ -22,38 +22,48 @@ namespace Textures
 	};
 };
 
-class TextureHolder
+//generic resource manager
+
+template <typename Resource, typename Identifier>
+class ResourceHolder
 {
 
 	public:
-		TextureHolder();
+		ResourceHolder();
 
 	public: //functions
-		void					load(Textures::ID id, const std::string& filename);
-		sf::Texture&			get(Textures::ID id);
+		void					load(Identifier id, const std::string& filename);
+		Resource&				get(Identifier id);
 
 
 	private: //vars
-		std::map<Textures::ID, 
-			std::unique_ptr<sf::Texture>> mTextureMap;
+		std::map<Identifier, 
+			std::unique_ptr<Resource>> mResourceMap;
 	
 };
 
-TextureHolder::TextureHolder()
+template <typename Resource, typename Identifier>
+ResourceHolder<Resource, Identifier>::ResourceHolder()
 	:
-mTextureMap()
+mResourceMap()
 {
 
 } 
-void TextureHolder::load(Textures::ID id, const std::string& filename)
+
+template <typename Resource, typename Identifier>
+void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {
-	std::unique_ptr<sf::Texture> texture(new sf::Texture());
-	texture->loadFromFile(filename);
-	mTextureMap.insert(std::make_pair(id, std::move(texture)));
+	std::unique_ptr<Resource> resource(new Resource());
+	resource->loadFromFile(filename);
+	mResourceMap.insert(std::make_pair(id, std::move(resource)));
 }
-sf::Texture& TextureHolder::get(Textures::ID id)
+
+
+
+template <typename Resource, typename Identifier>
+Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 {
-	auto found = mTextureMap.find(id);
+	auto found = mResourceMap.find(id);
 	return *found->second;
 }
 
