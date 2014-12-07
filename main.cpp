@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "resources.cpp";
-#include "parse_file.cpp";
-#include "Game.h";
+#include "resources.cpp"
+#include "parse_file.cpp"
+#include "Game.h"
+#include "tinyxml2.h"
 
 
 Game::Game()
-	: mWindow(sf::VideoMode(640, 480), "SFML Application")
+	: mWindow(sf::VideoMode(800, 600), "SFML Application")
 	, mPlayer()
 	, mSprite()
 	, mIsMovingUp(false)
@@ -24,12 +25,18 @@ Game::Game()
 	, PlayerSpeed(100.0f)
 	, windowX(0)
 	, windowY(0)
+	, tile()
+	, tileTex()
 	{
-		TextureHolder texHolder;
-		texHolder.load(Textures::Character, "Media/head.png");
+		//create a texture resource manager
+		ResourceHolder<sf::Texture, Textures::ID> texHolder; 
+		//load a texture under the name Character
+		texHolder.load(Textures::Character, "Media/tiles/tent.png");
 		mTexture = texHolder.get(Textures::Character);
 		mPlayer.setTexture(mTexture);
 		mPlayer.setPosition(100.f, 100.f);
+
+		spriteMenu();
 		
 		texHolder.load(Textures::Logo, "Media/logo.png");
 		mSprite.setPosition(20.0f, 20.0f);
@@ -186,12 +193,59 @@ void Game::render()
 	mWindow.clear();
 	mWindow.draw(mPlayer);
 	mWindow.draw(mSprite);
+
+	for (int i = 0; i <= 4; i++)
+	{
+		mWindow.draw(tile[i]);
+	}
+
 	mWindow.display();
 }
 
-int main()
+void Game::spriteMenu()
 {
+	//remove
+	int top = 425;
+	int left = 0;
+	
+		ResourceHolder<sf::Texture, Textures::ID> sprites;
+		sprites.load(Textures::House, "Media/tiles/house1.png");
+		sprites.load(Textures::House2, "Media/tiles/house2.png");
+		sprites.load(Textures::House3, "Media/tiles/house3.png");
+		sprites.load(Textures::House4, "Media/tiles/house4.png");
+		sprites.load(Textures::House5, "Media/tiles/house5.png");
+
+		tileTex[0] = sprites.get(Textures::House);
+		tileTex[1] = sprites.get(Textures::House2);
+		tileTex[2] = sprites.get(Textures::House3);
+		tileTex[3] = sprites.get(Textures::House4);
+		tileTex[4] = sprites.get(Textures::House5);
+
+		sf::FloatRect tileRect;
+
+		for (int i = 0; i <= 4; i++)
+		{
+			tileTex[i].setSmooth(1);
+			tile[i].setTexture(tileTex[i]);
+			tile[i].setScale(.5, .5);
+			tileRect = tile[i].getGlobalBounds();
+			top = mWindow.getSize().y - tileRect.height;
+			tile[i].setPosition(left, top);
+			
+			left+=tileRect.width;
+		}
+
+}
+
+int main()
+{	
 	Parser p;
 	Game game;
 	game.run();
+}
+
+using namespace tinyxml2;
+void XMLTest()
+{
+	
 }

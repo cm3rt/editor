@@ -13,6 +13,7 @@ class Game
 		void				render();
 		void				handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 		void				handlePlayerMouse(sf::Mouse::Button button, bool isPressed);
+		void				spriteMenu();
 
 
 	private:
@@ -39,5 +40,7 @@ class Game
 		bool				moveScreenUp;
 		bool				moveScreenDown;
 		sf::Sprite			spriteList[30]; 
+		sf::Sprite			tile[100];
+		sf::Texture			tileTex[100];
 		
 };
