@@ -42,5 +42,9 @@ class Game
 		sf::Sprite			spriteList[30]; 
 		sf::Sprite			tile[100];
 		sf::Texture			tileTex[100];
+
+		int					numTiles;
+		
+
 		
 };

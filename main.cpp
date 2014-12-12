@@ -27,6 +27,7 @@ Game::Game()
 	, windowY(0)
 	, tile()
 	, tileTex()
+	, numTiles(0)
 	{
 		//create a texture resource manager
 		ResourceHolder<sf::Texture, Textures::ID> texHolder; 
@@ -179,6 +180,21 @@ void Game::update(sf::Time deltaTime)
 		sf::Vector2f texXY(mTexture.getSize());
 		sf::Vector2f mouseXY(sf::Mouse::getPosition());
 
+		for (int counter = 0; counter < numTiles; counter++)
+		{
+			
+			if (((mouseXY.x - mWindow.getPosition().x) > tile[counter].getGlobalBounds().left)
+				&& ((mouseXY.x -mWindow.getPosition().x) < tile[counter].getGlobalBounds().left + tile[counter].getGlobalBounds().width)
+				&& ((mouseXY.y - mWindow.getPosition().y) > tile[counter].getGlobalBounds().top)
+				&& ((mouseXY.y - mWindow.getPosition().y) < tile[counter].getGlobalBounds().top + tile[counter].getGlobalBounds().height))
+			{
+				
+				mPlayer.setTexture(*tile[counter].getTexture(), true);
+				mPlayer.setScale(tile[counter].getScale());
+			}
+		}
+
+
 		mPlayer.setPosition(mouseXY.x - texXY.x, mouseXY.y - texXY.y);
 	}
 	
@@ -207,6 +223,7 @@ void Game::spriteMenu()
 	//remove
 	int top = 425;
 	int left = 0;
+	numTiles = 5;
 	
 		ResourceHolder<sf::Texture, Textures::ID> sprites;
 		sprites.load(Textures::House, "Media/tiles/house1.png");
@@ -223,7 +240,7 @@ void Game::spriteMenu()
 
 		sf::FloatRect tileRect;
 
-		for (int i = 0; i <= 4; i++)
+		for (int i = 0; i < numTiles; i++)
 		{
 			tileTex[i].setSmooth(1);
 			tile[i].setTexture(tileTex[i]);
@@ -234,6 +251,8 @@ void Game::spriteMenu()
 			
 			left+=tileRect.width;
 		}
+		
+		
 
 }
 
