@@ -22,7 +22,19 @@ namespace Textures
 		Grass, 
 		Bushes,
 		River,
-		Logo
+		Logo,
+		Altar,
+		Bridge,
+		Building,
+		Entrance,
+		Market,
+		Market2,
+		Table1,
+		Tent,
+		Tent2,
+		Tent3,
+		Grass2
+
 	};
 };
 

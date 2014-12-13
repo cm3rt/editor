@@ -31,6 +31,8 @@ class Game
 		const float			PlayerSpeed;
 		bool				mIsMouseLeftDown;
 		bool				mIsMouseRightDown;
+		bool				addToMap;
+		bool				zoomIn, zoomOut;
 		int					windowX;
 		int					windowY;
 
@@ -39,11 +41,15 @@ class Game
 		bool				moveScreenLeft;
 		bool				moveScreenUp;
 		bool				moveScreenDown;
-		sf::Sprite			spriteList[30]; 
+		
+		sf::Sprite*			spriteList[30]; 
 		sf::Sprite			tile[100];
+		sf::Sprite			objects[100];
 		sf::Texture			tileTex[100];
 
 		int					numTiles;
+		int					numSprites;
+		int					numObjects;
 		
 
 		
