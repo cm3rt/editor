@@ -172,16 +172,16 @@ void Game::update(sf::Time deltaTime)
 		movement.x += PlayerSpeed;
 
 	if (moveScreenUp){
-		screenMove.y -= 100;
+		screenMove.y -= 200;
 	}
 	if (moveScreenDown){
-		screenMove.y += 100;
+		screenMove.y += 200;
 	}
 	if (moveScreenLeft){
-		screenMove.x -= 100;
+		screenMove.x -= 200;
 	}
 	if (moveScreenRight){
-		screenMove.x += 100;
+		screenMove.x += 200;
 	}
 
 
